@@ -1,0 +1,42 @@
+<HTML>
+<title>MY HTA</title>
+<meta http-equiv="x-ua-compatible" content="ie=6"/>
+<HTA:APPLICATION
+        ID="MY_HTA_ID"
+        ApplicationName="MY_HTA"
+        ICON="PATH_TO_A_ICON_FILE"
+        SELECTION="NO"
+        NAVIGABLE="NO"
+        WINDOWSTATE="NORMAL"/>
+<BODY style="overflow:hidden;background-color:white;border:0px">
+<SCRIPT>
+var win_width = document.body.clientWidth;
+var win_height = document.body.clientHeight;
+var win_left = window.screenLeft;
+var win_top = window.screenTop;
+
+try
+ {
+  window.moveTo(-100, -100)
+  window.resizeTo(1, 1)
+ }
+catch(error)
+ {
+
+ }
+
+function trigger()
+{
+ window.moveTo(win_left, win_top);
+ window.resizeTo(win_width, win_height);
+
+ window['child'] = window.showModelessDialog("dlg.hta", window, "dialogWidth:1px;dialogHeight:1px;dialogLeft:-1px;dialogTop:-1px;statusbar:no;help:no;resizable:no;unadorned:yes");
+ child.dialogWidth = win_width+"px";
+ child.dialogHeight = win_height+"px";
+ child.dialogTop = win_top+"px";
+ child.dialogLeft = win_left+"px";
+}
+setTimeout("trigger()", 200);
+</SCRIPT>
+</BODY>
+</HTML>
